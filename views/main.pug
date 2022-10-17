@@ -1,0 +1,309 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+        link(rel="stylesheet" type="text/css" href="CSS/main.css")
+        link(rel='shortcut icon' type='image/png' href='/Images/logo_dark.png')
+
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet")
+
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+
+        title Maria A.
+
+    script.
+        var disableCross=false, crossed=false;
+        var lastScrollTop = 0;
+        var sections = ["home", "about", "skills", "projects", "papers", "timeline"]
+        var scrollInterval;
+        $(document).ready(function(){
+            enableScrolling()
+            for(let i=1;i<sections.length;i++)$("."+sections[i]).hide()            
+
+            $("#logo").click(function(){changePage("home");})
+            $(".crossDiv").click(function(){
+                if(disableCross)return;
+
+                disableCross=true
+                if(!crossed)openDropDown()
+                else closeDropDown();
+            })
+
+            $("#linkedin").click(function(){window.open("https://www.linkedin.com/in/maria-alabdulrahman-843165109/",'_blank')})
+            $("#github").click(function(){window.open("https://github.com/mariaalabdulrahman",'_blank')})
+            $("#resumeDiv").click(function(){window.open("/cv.pdf",'_blank')})
+            $("#email").click(function(){
+                try{clearTimeout(emailTimeout)} 
+                catch(e){}
+                $(".prompt").show(100)
+                navigator.clipboard.writeText("maria.alabdulrahmanips@gmail.com");
+                emailTimeout = setTimeout(function(){$(".prompt").hide(100)}, 3000)
+            })
+
+            $(".aboutBtn").click(function(){changePage("about")})
+            $(".skillsBtn").click(function(){changePage("skills")})
+            $(".projectsBtn").click(function(){changePage("projects")})
+            $(".papersBtn").click(function(){changePage("papers")})
+            $(".timelineBtn").click(function(){changePage("timeline")})
+
+            $(".projectCard").click(function(){
+                if(parseInt(window.innerWidth)<=900)return 
+                var info = $(this)[0].children[1]
+
+                if($(info).css("width")=="0px"){
+                    $(info).animate({"width":"50%", "padding":"20px", "padding-left":"40px"}, 300)
+                    for(let i=0;i<info.children.length;i++)$(info.children[i]).fadeIn(500)
+                }
+                else {
+                    $(info).animate({"width":"0", "padding":"0", "padding-left":"0"}, 300)
+                    for(let i=0;i<info.children.length;i++)$(info.children[i]).fadeOut(100)
+                }
+            })
+            $(".imgDiv").hover(
+                function(){$(this.children[0]).animate({"height":"100%"}, 200)},
+                function(){$(this.children[0]).animate({"height":"7%"}, 200)}
+            )
+        })
+        function changePage(page){
+            disableCross=true
+            closeDropDown()
+            for(var i=0;i<sections.length;i++)
+                if(sections[i]!=page)$("."+sections[i]).slideUp(500)
+            $("."+page).slideDown(500, function(){disableCross=false})
+        }
+        function openDropDown(){
+            $(".header").css("background-color","transparent")
+            scrollInterval = setInterval(function(){
+                TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+                LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
+
+                if(TopScroll==0&&LeftScroll==0){
+                    clearInterval(scrollInterval)
+
+                    $("#crossBottom").animate({"margin-top":"0","top":"-11px"},function(){
+                        $('#crossTop').animate(
+                            { deg: 45 },
+                            {
+                                duration: 500,step: function(now) {$(this).css({ transform: 'rotate(' + now + 'deg)' });}
+                            },
+                        );
+                        $('#crossBottom').animate(
+                            { deg: -45 },
+                            {
+                                duration: 500,step: function(now) {$(this).css({ transform: 'rotate(' + now + 'deg)' });},
+                                complete:function(){
+                                    crossed=true
+                                    disableCross=false
+                                    $(".options, .additionals").fadeIn(300)
+                                }
+                            },
+                        );
+                        $("#dropDown").slideDown({
+                            start: function () {$(this).css({display: "flex"})},
+                            duration:500
+                        });
+                    })
+                    disableScrolling()
+                }
+                else window.scrollTo(LeftScroll-20,TopScroll-20)
+
+            }, 15)
+        }
+        function closeDropDown(){
+            if(!crossed)return;
+            $(".options, .additionals").fadeOut(500)
+            $('#crossTop').animate(
+                { deg: 0 },
+                {
+                    duration: 500,step: function(now) {$(this).css({ transform: 'rotate(' + now + 'deg)' });}
+                },
+            );
+            $('#crossBottom').animate(
+                { deg: 0 },
+                {
+                    duration: 500,step: function(now) {$(this).css({ transform: 'rotate(' + now + 'deg)' });}
+                }
+            );
+            $("#crossBottom").animate({"margin-top":"15px","top":"-0px"},function(){
+                disableCross=crossed=false
+                $(".header").css("background-color","#f86424")
+            })
+            $("#dropDown").slideUp(500)
+
+            enableScrolling()
+        }
+        function disableScrolling(){
+            TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+            LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
+            window.onscroll = function() {window.scrollTo(LeftScroll, TopScroll);};
+        }
+        function enableScrolling(){window.onscroll = function(e) {}}
+
+    body
+        #dropDown
+            .dropDownContent
+                .options
+                    span.aboutBtn.option About 
+                    br
+                    span.skillsBtn.option Skills 
+                    br
+                    span.projectsBtn.option Projects 
+                    br
+                    span.papersBtn.option Papers 
+                    br
+                    span.timelineBtn.option Timeline
+                
+                .additionals
+                    img#linkedin(src='/Images/linkedin.png', width='50px')
+                    img#github(src='/Images/github.png', width='50px')
+                    img#email(src='/Images/email.png', width='50px')
+        .prompt
+            span Email ID copied!
+        .header
+            div#logo(style="display:flex; flex-direction:column; justify-content:center")
+                img(src='/Images/logo_transparent.png', width='70px')
+            .crossDiv
+                #crossTop
+                    hr
+                #crossBottom
+                    hr
+            #resumeDiv(style="display:flex; flex-direction:column; justify-content:center;")
+                p Resume
+
+        .home.lineUp
+            p COMPUTER/SOFTWARE ENGINEER
+            span.heading Maria AlAbdulrahman
+
+            #secondaryButtons
+                p.aboutBtn(style="margin-left:0") About
+                p.skillsBtn(style="margin-left:0") Skills
+                p.projectsBtn(style="margin-left:0") Projects
+                p.papersBtn(style="margin-left:0") Papers
+                p.timelineBtn(style="margin-left:0") Timeline
+        
+        .about.lineUp
+            p.generalP.
+                Hi! I'm Maria. I'm an ambitious individual, absolutely fascinated by the expansive field of <strong>Computer Engineering </strong>
+                with well-founded skills in <strong>Software Development</strong>. 
+            p.generalP.
+                I'm currently an undergrad student at <a href="www.pmu.edu.sa">Prince Mohammed Bin Fahd University, Saudi Arabia</a>. 
+                I'm majoring in both <strong>Software Engineering</strong> as well as <strong>Computer Engineering</strong>. <br>
+                My career as an undergrad student so far has been one of success.
+                My standing GPA is an impressive 3.98/4, making me part of the Dean's list.
+
+            p.generalP.
+                I have a very strong interest for <strong>Biomedical engineering</strong>. I'm also deeply intrigued by  
+                <strong>Artificial Intelligence</strong>. And last, but not the least, the field of <strong>Computer Networks 
+                and Cybersecurity</strong> immensely fascinates me.
+
+            p.generalP.
+                That's all about me! Wishing you a splendid stay on this website!
+
+        .skills.lineUp
+            span.heading2 Skills
+            .skillDiv
+                .skillCard
+                    img(src="/Images/robot_head.png")
+                    .skillText
+                        h1 Electronics and IoT
+                        p.
+                            I have extensive experience working with 
+                            <strong>Arduino</strong> and <strong>Raspberri Pi</strong>. 
+                            My most notable projects in this field are the 
+                            <strong>Haptic VR glove</strong> and <strong>Electronic Xylophone</strong>.
+                .skillCard
+                    img(src="/Images/tag.png")
+                    .skillText
+                        h1 HTML, CSS and JS
+                        p.
+                            I mainly focus on <strong>Front End Development</strong>. 
+                            My most notable projects in this field is the
+                            <strong>Inventory Management System</strong> application I built.
+                .skillCard
+                    img(src="/Images/programming.png")
+                    .skillText
+                        h1 Java, Python
+                        p.
+                            I'm quite comfortable working with 
+                            <strong>Java</strong> and <strong>Python</strong>. 
+                            By extension, I am able to participate in projects 
+                            that use frameworks built around the aforementioned languages.
+
+        .projects.lineUp(style="padding-top:0")
+            span.heading2 Projects     
+            .projectsContainer.lineUp
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/haptic.png')")
+                        p.
+                            <strong>Haptic VR Glove</strong><br><br>
+                            Arduino - Unity
+                    .projectCardInfo
+                        h2 Haptic VR Glove - 2022
+                        p.
+                            A glove was constructed using IMUs and flex sensors which collected hand movement data. 
+                        p.
+                            The data was fed to a Unity environment, where a virtual hand reflects the hand 
+                            movement data collected from the glove. 
+                        p.
+                            Events in the game result in haptic feedback on the glove.
+
+                br
+                br
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/ims.jpg')")
+                        p.
+                            <strong>Inventory Management System</strong><br><br>
+                            Keras - OpenCV - NodeJS - Raspberry Pi
+                    .projectCardInfo
+                        h2 Inventory Management System - 2022
+                        p.
+                            Items are recognized by a raspberry pi through live video feed from a webcam. Users 
+                            can check-in and check-out items. Inventory database is updated accordingly. 
+                        p.
+                            Inventory, stock, check-outs and user information is displayed on a web application. 
+                            New items can be registered by an admin using the 'Register Item' feature. 
+                        p.
+                            Images of new items are captured which are used to retrain the deep learning model. 
+                            Designed a 3D printed wall mounting case for the system using Fusion360.
+
+                br
+                br
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/xylo.jpg')")
+                        p.
+                            <strong>Electronic Xylophone</strong><br><br>
+                            Arduino
+                    .projectCardInfo
+                        h2 Electronic Xylophone - 2022
+                        p.
+                            A system that is designed to teach beginners how to use a xylophone. 
+                            An array of momentary switches  correspond  to a note on the xylophone. 
+                            LCD displays the note played by the user.
+
+            br
+            br
+            br   
+
+        .papers.lineUp
+            p.generalP(style='text-align: start;') No published papers at the moment. It's a work in progress.
+            span.annotated(style='text-align: start;') Coming Soon
+
+        .timeline(style="padding-top:0")
+            span.lineUp.heading2(style='margin:auto;') Timeline
+            br
+            br
+            .timeLineContainer.lineUp(style="margin-bottom:100px")
+                .eventContainer.left.lineUp
+                    .content
+                        h2 May 2024
+                        p Expected graduation date
+
+                .eventContainer.right.lineUp
+                    .content
+                        h2 June - August, 2022
+                        p Robotics Lab at Prince Mohmamed Bin Fahd University, Robotics Engineer Intern         
