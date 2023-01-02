@@ -34,15 +34,33 @@ html(lang="en")
                 else closeDropDown();
             })
 
-            $("#linkedin").click(function(){window.open("https://www.linkedin.com/in/maria-alabdulrahman-843165109/",'_blank')})
-            $("#github").click(function(){window.open("https://github.com/mariaalabdulrahman",'_blank')})
-            $("#resumeDiv").click(function(){window.open("/cv.pdf",'_blank')})
-            $("#email").click(function(){
-                try{clearTimeout(emailTimeout)} 
+            $(".linkedin").click(function(){window.open("https://www.linkedin.com/in/maria-alabdulrahman-843165109/",'_blank')})
+            $(".github").click(function(){window.open("https://github.com/mariaalabdulrahman",'_blank')})
+            $("#resumeDiv").click(function(){window.open("./cv.pdf",'_blank')})
+            $(".email").click(function(){
+                try{clearTimeout(emailTimeout)}
                 catch(e){}
+                var y= document.getElementById("hidURL");
+
+                y.style.position = 'relative';
+                y.style.top = 0;
+                y.style.left = 0;
+                y.style.width = '100%';
+                y.style.padding = 0;
+                y.style.border = 'none';
+                y.style.outline = 'none';
+                y.style.boxShadow = 'none';
+                y.style.background = 'transparent';
+                y.innerHTML="maria.alabdulrahmanips@gmail.com";
+                document.execCommand("copy");
                 $(".prompt").show(100)
-                navigator.clipboard.writeText("maria.alabdulrahmanips@gmail.com");
-                emailTimeout = setTimeout(function(){$(".prompt").hide(100)}, 3000)
+                emailTimeout = setTimeout(function(){
+                    y.focus()
+                    y.select();
+                    y.setSelectionRange(0, 99999);
+                    document.execCommand("copy");
+                    emailTimeout = setTimeout(function(){$(".prompt").hide(100)}, 3000)
+                }, 200)
             })
 
             $(".aboutBtn").click(function(){changePage("about")})
@@ -110,7 +128,7 @@ html(lang="en")
                     })
                     disableScrolling()
                 }
-                else window.scrollTo(LeftScroll-20,TopScroll-20)
+                else window.scrollTo(LeftScroll-60,TopScroll-60)
 
             }, 15)
         }
@@ -159,11 +177,12 @@ html(lang="en")
                     span.timelineBtn.option Timeline
                 
                 .additionals
-                    img#linkedin(src='/Images/linkedin.png', width='50px')
-                    img#github(src='/Images/github.png', width='50px')
-                    img#email(src='/Images/email.png', width='50px')
+                    img.linkedin(src='/Images/linkedin.png', width='50px')
+                    img.github(src='/Images/github.png', width='50px')
+                    img.email(src='/Images/email.png', width='50px')
         .prompt
             span Email ID copied!
+            textarea(id="hidURL" style="display:block" readonly)
         .header
             div#logo(style="display:flex; flex-direction:column; justify-content:center")
                 img(src='/Images/logo_transparent.png', width='70px')
@@ -176,6 +195,10 @@ html(lang="en")
                 p Resume
 
         .home.lineUp
+            .additionals2
+                img.linkedin(src='/Images/linkedin.png', width='30px')
+                img.github(src='/Images/github.png', width='30px')
+                img.email(src='/Images/email.png', width='30px')
             p COMPUTER/SOFTWARE ENGINEER
             span.heading Maria AlAbdulrahman
 
@@ -219,7 +242,7 @@ html(lang="en")
                 .skillCard
                     img(src="/Images/tag.png")
                     .skillText
-                        h1 HTML, CSS and JS
+                        h1 Flask, HTML, CSS and JS
                         p.
                             I mainly focus on <strong>Front End Development</strong>. 
                             My most notable projects in this field is the
@@ -269,7 +292,6 @@ html(lang="en")
                             New items can be registered by an admin using the 'Register Item' feature. 
                         p.
                             Images of new items are captured which are used to retrain the deep learning model. 
-                            Designed a 3D printed wall mounting case for the system using Fusion360.
 
                 br
                 br
@@ -285,13 +307,35 @@ html(lang="en")
                             An array of momentary switches  correspond  to a note on the xylophone. 
                             LCD displays the note played by the user.
 
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/os.jpg')")
+                        p.
+                            <strong>OS Algorithms Simulations</strong><br><br>
+                            NodeJS, HTML, JS, CSS
+                    .projectCardInfo
+                        h2 OS Algorithms Simulations
+                        p.
+                            Web application that displays interactive simulations for Operating Systems algorithms.
+                            Simulations include Job Scheduling, Memory Page Replacement, Round Robin, etc.
+
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/plane.jpg')")
+                        p.
+                            <strong>Airline Management System</strong><br><br>
+                            Flask, HTML, JS, CSS, SQLite
+                    .projectCardInfo
+                        h2 Airline Management System
+                        p.
+                            Web application for airline management. <br>
+                            The backend is managed by a Flask server. SQLite database with seven entities manages the entire airline system.
+
             br
             br
             br   
 
         .papers.lineUp
-            p.generalP(style='text-align: start;') No published papers at the moment. It's a work in progress.
-            span.annotated(style='text-align: start;') Coming Soon
+            span.heading2 Papers 
+            p.generalP(style='text-align: start;') Maria AlAbdulrahman, et al, <span style='color:#63fdd9;'><em>“Low Cost and Scalable Haptic VR Glove”</em></span>, International Conference on Computational Intelligence and Communication Networks, CICN, Dec 2022, Khobar KSA
 
         .timeline(style="padding-top:0")
             span.lineUp.heading2(style='margin:auto;') Timeline
@@ -306,4 +350,9 @@ html(lang="en")
                 .eventContainer.right.lineUp
                     .content
                         h2 June - August, 2022
-                        p Robotics Lab at Prince Mohmamed Bin Fahd University, Robotics Engineer Intern         
+                        p Robotics Lab at Prince Mohmamed Bin Fahd University, Robotics Engineer Intern
+                
+                .eventContainer.left.lineUp
+                    .content
+                        h2 August 2020
+                        p Started undergraduate studies at Prince Mohammed Bin Fahd University

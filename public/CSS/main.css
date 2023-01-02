@@ -6,6 +6,7 @@ body{
     font-family: 'Arvo', serif;
     user-select: none;
 }
+textarea {resize: none;}
 a{color:#f6e2db;}
 a:hover{color:darkcyan}
 .header{
@@ -120,7 +121,7 @@ a:hover{color:darkcyan}
 #secondaryButtons *{cursor: pointer;}
 #secondaryButtons p:hover{background-color: darkcyan;}
 
-.additionals{
+.additionals,.additionals2{
     display: flex;
     margin: auto;
     justify-content: space-evenly;
@@ -129,11 +130,17 @@ a:hover{color:darkcyan}
     padding: 10px;
     border-radius: 7px;
 }
-.additionals img{cursor: pointer;}
+.additionals img, .additionals2 img{cursor: pointer;}
+
+.additionals2{
+    margin-left: 0;
+    width: 150px;
+    display: none;
+}
 
 .prompt{
     position: absolute;
-    width: 170px;
+    width: 260px;
     top: 10px;
     left: 10px;
     border-radius: 10px;
@@ -169,7 +176,7 @@ a:hover{color:darkcyan}
 }
 .skillCard{
     height: 350px;
-    width: 25%;
+    width: 27%;
     background-color: darkcyan;
     border-radius: 10px;
     padding: 20px;
@@ -365,6 +372,9 @@ a:hover{color:darkcyan}
     .heading{
         font-size: 150px;
     }
+    .additionals{
+        width: 15%;
+    }
 }
 @media (max-width:1250px){
     .heading{
@@ -383,7 +393,7 @@ a:hover{color:darkcyan}
 }
 @media (max-width:1400px){
     .additionals{
-        width: 100%;
+        width: 20%;
     }
     .imgDiv{display: none;}
     .projectCardInfo{
@@ -397,6 +407,11 @@ a:hover{color:darkcyan}
 @media (max-width:1250px){
     .heading{
         font-size: 100px;
+    }
+}
+@media (max-width:1000px){
+    .additionals{
+        width: 25%;
     }
 }
 @media (max-width:850px){
@@ -416,6 +431,7 @@ a:hover{color:darkcyan}
         height: 50px;
     }
     .crossDiv{display: none;}
+    .additionals2{display: flex;}
     #secondaryButtons{display: block;}
 }
 @media (max-width:850px){
@@ -450,16 +466,20 @@ a:hover{color:darkcyan}
     0% {
         opacity: 0;
         transform: translateY(80%);
+        -webkit-transform-style: preserve-3d;
     }
     20% {
         opacity: 0;
+        -webkit-transform-style: preserve-3d;
     }
     50% {
         opacity: 1;
         transform: translateY(0%);
+        -webkit-transform-style: preserve-3d;
     }
     100% {
         opacity: 1;
         transform: translateY(0%);
+        -webkit-transform-style: preserve-3d;
     }
 }
