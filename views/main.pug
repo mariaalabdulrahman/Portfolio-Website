@@ -231,9 +231,18 @@ html(lang="en")
             span.heading2 Skills
             .skillDiv
                 .skillCard
+                    img(src="/Images/ai.png")
+                    .skillText
+                        h1 PyTorch and Sklearn
+                        p.
+                            I've worked on 
+                            <strong>Computer Vision</strong> based applications. 
+                            My most notable projects in this field are 
+                            <strong>Pothole Severity Classification</strong> and <strong>Inventory Management System</strong>.
+                .skillCard
                     img(src="/Images/robot_head.png")
                     .skillText
-                        h1 Electronics and IoT
+                        h1 IoT and Robotics
                         p.
                             I have extensive experience working with 
                             <strong>Arduino</strong> and <strong>Raspberri Pi</strong>. 
@@ -260,6 +269,23 @@ html(lang="en")
         .projects.lineUp(style="padding-top:0")
             span.heading2 Projects     
             .projectsContainer.lineUp
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/sampleSegPreds.jpg')")
+                        p.
+                            <strong>Pothole Severity Classification</strong><br><br>
+                            Instance Segmentation Methods - Decision Trees
+                    .projectCardInfo
+                        h2 Pothole Severity Classification - 2023
+                        p.
+                            Images depicting potholes were collected (17400 images).
+                        p.
+                            An instance segmentation model was trained (YoloV8). 
+                            Structural features such as pothole area, height, and width were extracted from the segmented images
+                        p.
+                            A decision tree classifier is trained on the extracted features; highest accuracy yeilded was 98.9%.
+
+                    br
+                    br
                 .projectCard
                     .imgDiv(style="background-image:url('/Images/haptic.png')")
                         p.
@@ -342,10 +368,15 @@ html(lang="en")
             br
             br
             .timeLineContainer.lineUp(style="margin-bottom:100px")
-                .eventContainer.left.lineUp
+                .eventContainer.right.lineUp
                     .content
                         h2 May 2024
                         p Expected graduation date
+
+                .eventContainer.left.lineUp
+                    .content
+                        h2 January 2023
+                        p Founded the Robotics Society Club
 
                 .eventContainer.right.lineUp
                     .content

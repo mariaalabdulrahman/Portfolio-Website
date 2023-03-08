@@ -386,7 +386,7 @@ a:hover{color:darkcyan}
         flex-direction: column;
     }
     .skillCard{
-        width: 90%;
+        width: 70%;
         margin: auto;
         margin-top: 20px;
     }
@@ -439,6 +439,9 @@ a:hover{color:darkcyan}
     .projectsContainer, .projects{padding: 0;}
     .projectCard{width: 100%;}
     .projectCardInfo{width: 100%;}
+}
+@media (max-width:750px){
+    skillCard{width: 95%;}
 }
 @media (max-width:450px){
     .heading{
