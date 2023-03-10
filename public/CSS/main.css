@@ -384,11 +384,13 @@ a:hover{color:darkcyan}
 @media (max-width:1450px){
     .skillDiv{
         flex-direction: column;
+        flex-flow: row wrap;
     }
     .skillCard{
         width: 70%;
         margin: auto;
         margin-top: 20px;
+        margin-bottom: 10px;
     }
 }
 @media (max-width:1400px){
