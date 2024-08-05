@@ -217,7 +217,7 @@ html(lang="en")
                 I'm currently an undergrad student at <a href="www.pmu.edu.sa">Prince Mohammed Bin Fahd University, Saudi Arabia</a>. 
                 I'm majoring in both <strong>Software Engineering</strong> as well as <strong>Computer Engineering</strong>. <br>
                 My career as an undergrad student so far has been one of success.
-                My standing GPA is an impressive 3.98/4, making me part of the Dean's list.
+                My standing GPA is a 3.98/4, making me part of the Dean's list.
 
             p.generalP.
                 I have a very strong interest for <strong>Biomedical engineering</strong>. I'm also deeply intrigued by  
@@ -238,7 +238,7 @@ html(lang="en")
                             I've worked on 
                             <strong>Computer Vision</strong> based applications. 
                             My most notable projects in this field are 
-                            <strong>Pothole Severity Classification</strong> and <strong>Inventory Management System</strong>.
+                            <strong>Pothole Severity Classification</strong> and <strong>DASH</strong>.
                 .skillCard
                     img(src="/Images/robot_head.png")
                     .skillText
@@ -269,6 +269,49 @@ html(lang="en")
         .projects.lineUp(style="padding-top:0")
             span.heading2 Projects     
             .projectsContainer.lineUp
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/sampleSegPreds.jpg')")
+                        p.
+                            <strong>Advanced Quadruped Robot</strong><br><br>
+                    .projectCardInfo
+                        h2 DASH: Dedicated Autonomous Service Helper
+                        p.
+                            Engineered DASH from scratch, creating a robust quadruped robot using brushless motors, motor drivers, absolute encoders, and arduinos for stable movement.
+                        p.
+                            Implemented functionalities with ROS2, integrating AI features with CV and NLP.
+                        p.
+                            Developed a mobile app and a touchscreen UI for intuitive user interaction.
+                    br
+                    br
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/sampleSegPreds.jpg')")
+                        p.
+                            <strong>SARID: Arabic Story Generator</strong><br><br>
+                            using a Fine-Tuned Large Language Model and Text-to-Image Generation
+                    .projectCardInfo
+                        h2 SARID - 2023
+                        p.
+                            Web Scraping 527 stories which were used to fine-tune a pre-trained LLM (Davinci-003).
+                        p.
+                            Generated corresponding images using Midjourney for a cohesive storytelling experience.
+                        p.
+                            Developed a user-friendly interface enabling users to input preferences to generate personalized stories.
+                    br
+                    br
+                .projectCard
+                    .imgDiv(style="background-image:url('/Images/sampleSegPreds.jpg')")
+                        p.
+                            <strong>Arabic Offense Text Identification and Classification</strong><br><br>
+                    .projectCardInfo
+                        h2 Arabic Text Classification - 2022
+                        p.
+                            Developed and implemented a robust system for classifying Arabic tweets into categories.
+                        p.
+                            Utilized text representation techniques, including TF-IDF, BoW, RNN, AraBERT, and mBERT.
+                        p.
+                            Achieved an 89% accuracy in classification with TF-IDF and BoW methods.
+                    br
+                    br
                 .projectCard
                     .imgDiv(style="background-image:url('/Images/sampleSegPreds.jpg')")
                         p.
